@@ -1,0 +1,33 @@
+{%extends "base.html"%}
+{%block title%} Login Page {%endblock%}
+
+{%block content%}
+<div class="card fade-in" style="max-width: 500px; margin: 0 auto;">
+    <h1 style="text-align: center; margin-bottom: 2rem;">Login / Register</h1>
+    <p style="text-align: center; color: var(--text-secondary); margin-bottom: 2rem;">
+        Enter your details to login or create a new account
+    </p>
+
+    <form action="{{ url_for('auth.login')}}" method="POST">
+        <div class="form-group">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" id="name" name="nm" class="form-control" placeholder="Enter your name" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email" required>
+        </div>
+        
+        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">
+            Login / Register
+        </button>
+    </form>
+    
+    <div style="text-align: center; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
+        <p style="color: var(--text-secondary); font-size: 0.9rem;">
+            New users will be automatically registered
+        </p>
+    </div>
+</div>
+{%endblock%}

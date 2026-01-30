@@ -1,0 +1,39 @@
+{%extends "base.html"%}
+{%block title%} View All Users {%endblock%}
+
+{%block content%}	
+<div class="card fade-in">
+    <h1 style="text-align: center; margin-bottom: 1rem;">All Users</h1>
+    <p style="text-align: center; color: var(--text-secondary); margin-bottom: 2rem;">
+        {% if values %} 
+            Total Users: {{ values|length }}
+        {% else %}
+            No users found. <a href="{{ url_for('auth.login') }}" style="color: var(--primary-color);">Be the first to register!</a>
+        {% endif %}
+    </p>
+</div>
+
+{% if values %}
+    <div class="user-list">
+        {% for item in values %}
+            <div class="user-card fade-in" style="animation-delay: {{ loop.index0 * 0.1 }}s;">
+                <div class="user-name">{{ item.name }}</div>
+                {% if item.email %}
+                    <div class="user-email">{{ item.email }}</div>
+                {% else %}
+                    <div class="user-email" style="color: var(--text-secondary); font-style: italic;">No email set</div>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <div class="card fade-in" style="text-align: center; padding: 3rem;">
+        <div style="font-size: 4rem; margin-bottom: 1rem; opacity: 0.5;">👥</div>
+        <h3 style="color: var(--text-secondary); margin-bottom: 1rem;">No Users Yet</h3>
+        <p style="color: var(--text-secondary); margin-bottom: 2rem;">
+            Be the first to join our community!
+        </p>
+        <a href="{{ url_for('auth.login') }}" class="btn btn-primary">Register Now</a>
+    </div>
+{% endif %}
+{%endblock%}

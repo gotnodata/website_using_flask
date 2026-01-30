@@ -1,0 +1,106 @@
+{% extends "base.html" %} 
+{% block title%} Home Page {% endblock %}
+
+{%block content%}
+<div class="card fade-in">
+    <h1>Welcome to my First Flask Website!</h1>
+    <p>Manage and view user profiles with this modern Flask application.</p>
+    
+    {% if 'user' in session %}
+        <div style="margin-top: 2rem;">
+            <h3>Welcome back, {{ session['user'] }}!</h3>
+            <p style="margin-top: 1rem;">
+                <a href="{{ url_for('main.view') }}" class="btn btn-primary">View All Users</a>
+                <a href="{{ url_for('auth.user') }}" class="btn btn-secondary" style="margin-left: 1rem;">Update Profile</a>
+            </p>
+        </div>
+    {% else %}
+        <div style="margin-top: 2rem;">
+            <h3>Get Started</h3>
+            <p style="margin-top: 1rem;">
+                <a href="{{ url_for('auth.login') }}" class="btn btn-primary">Login / Register</a>
+                <a href="{{ url_for('main.view') }}" class="btn btn-secondary" style="margin-left: 1rem;">View Users</a>
+            </p>
+        </div>
+    {% endif %}
+</div>
+
+<!-- Dog Images Gallery -->
+<div class="card fade-in" style="margin-top: 2rem;">
+    <h2 style="text-align: center; margin-bottom: 1rem;">🐕 Cute Dog Gallery</h2>
+    <p style="text-align: center; color: var(--text-secondary); margin-bottom: 2rem; font-size: 1.1rem;">
+        Welcome, take a look at these cute dog pictures before we get into it!
+    </p>
+    
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 2rem;">
+        <div class="image-card">
+            <img src="{{ url_for('static', filename='images/1.jpg') }}" alt="Cute Dog 1" class="gallery-image" style="width: 100%; height: 250px; object-fit: cover; border-radius: var(--radius); box-shadow: var(--shadow-md); cursor: pointer;" onclick="openModal('{{ url_for('static', filename='images/1.jpg') }}', 'Happy Pup')">
+            <p style="text-align: center; margin-top: 1rem; color: var(--text-secondary); font-weight: 500;">Happy Pup</p>
+        </div>
+        <div class="image-card">
+            <img src="{{ url_for('static', filename='images/2.jpg') }}" alt="Cute Dog 2" class="gallery-image" style="width: 100%; height: 250px; object-fit: cover; border-radius: var(--radius); box-shadow: var(--shadow-md); cursor: pointer;" onclick="openModal('{{ url_for('static', filename='images/2.jpg') }}', 'Adorable Friend')">
+            <p style="text-align: center; margin-top: 1rem; color: var(--text-secondary); font-weight: 500;">Adorable Friend</p>
+        </div>
+        <div class="image-card">
+            <img src="{{ url_for('static', filename='images/3.jpg') }}" alt="Cute Dog 3" class="gallery-image" style="width: 100%; height: 250px; object-fit: cover; border-radius: var(--radius); box-shadow: var(--shadow-md); cursor: pointer;" onclick="openModal('{{ url_for('static', filename='images/3.jpg') }}', 'Sweet Companion')">
+            <p style="text-align: center; margin-top: 1rem; color: var(--text-secondary); font-weight: 500;">Sweet Companion</p>
+        </div>
+    </div>
+</div>
+
+<!-- Full Screen Modal -->
+<div id="imageModal" class="modal" onclick="closeModal()">
+    <div class="modal-content" onclick="event.stopPropagation()">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img id="modalImage" src="" alt="Full size dog image">
+        <div id="modalCaption" class="modal-caption"></div>
+    </div>
+</div>
+
+<script>
+function openModal(imageSrc, caption) {
+    const modal = document.getElementById('imageModal');
+    const modalImg = document.getElementById('modalImage');
+    const modalCaption = document.getElementById('modalCaption');
+    
+    modal.style.display = 'flex';
+    modalImg.src = imageSrc;
+    modalCaption.textContent = caption;
+    document.body.style.overflow = 'hidden'; // Prevent scrolling
+}
+
+function closeModal() {
+    const modal = document.getElementById('imageModal');
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto'; // Enable scrolling
+}
+
+// Close modal with Escape key
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+        closeModal();
+    }
+});
+</script>
+
+<div class="card fade-in" style="margin-top: 2rem;">
+    <h2>Features</h2>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
+        <div style="text-align: center; padding: 1.5rem; border-radius: var(--radius); background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(6, 182, 212, 0.1));">
+            <div style="font-size: 2rem; margin-bottom: 1rem;">👥</div>
+            <h3>User Management</h3>
+            <p>Register and manage user profiles with ease</p>
+        </div>
+        <div style="text-align: center; padding: 1.5rem; border-radius: var(--radius); background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(6, 182, 212, 0.1));">
+            <div style="font-size: 2rem; margin-bottom: 1rem;">📧</div>
+            <h3>Email Storage</h3>
+            <p>Store and manage user email addresses</p>
+        </div>
+        <div style="text-align: center; padding: 1.5rem; border-radius: var(--radius); background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(239, 68, 68, 0.1));">
+            <div style="font-size: 2rem; margin-bottom: 1rem;">🔒</div>
+            <h3>Secure Sessions</h3>
+            <p>Safe login and session management</p>
+        </div>
+    </div>
+</div>
+{%endblock%}
