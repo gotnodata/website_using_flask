@@ -1,3 +1,4 @@
+# Where we define our authentication-related routes and logic.
 from flask import Blueprint, redirect, url_for, render_template, request, session, flash
 from models import db, users
 

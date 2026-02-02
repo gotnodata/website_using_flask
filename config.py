@@ -1,3 +1,4 @@
+# Configuration settings for the Flask application.
 from datetime import timedelta
 
 class Config:

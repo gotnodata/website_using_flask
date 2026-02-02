@@ -1,3 +1,4 @@
+# Where we define the main blueprint routes.
 from flask import Blueprint, render_template
 from models import users
 

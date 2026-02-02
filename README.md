@@ -37,16 +37,33 @@ A modern, responsive Flask web application with user management and a cute dog g
 
 3. **Install dependencies**
    ```bash
-   pip install flask flask-sqlalchemy
+   pip install -r requirements.txt
    ```
 
 4. **Run the application**
    ```bash
-   python second.py
+   python app.py
    ```
 
 5. **Open your browser**
    Navigate to `http://127.0.0.1:5000`
+
+## 🧪 Testing
+
+Run the test suite:
+
+```bash
+# Run all tests
+pytest
+
+# Run with verbose output
+pytest -v
+
+# Run with coverage
+pytest --cov=. --cov-report=html
+```
+
+See [TESTING.md](TESTING.md) for detailed testing instructions.
 
 ## 🚀 Usage
 
@@ -70,21 +87,30 @@ A modern, responsive Flask web application with user management and a cute dog g
 
 ```
 website_using_flask/
-├── static/
-│   ├── images/
-│   │   ├── 1.jpg
-│   │   ├── 2.jpg
-│   │   └── 3.jpg
+├── app.py                 # Main Flask application
+├── models.py              # Database models
+├── config.py              # Application configuration
+├── test_config.py         # Test configuration
+├── requirements.txt       # Python dependencies
+├── pytest.ini            # Pytest configuration
+├── blueprints/           # Flask blueprints
+│   ├── auth.py           # Authentication routes
+│   └── main.py           # Main routes
+├── static/               # Static files
 │   └── style.css
-├── templates/
+├── templates/            # HTML templates
 │   ├── base.html
 │   ├── index.html
 │   ├── login.html
 │   ├── user.html
 │   └── view.html
-├── second.py
-├── main.py
-├── users.sqlite3
+├── tests/                # Test suite
+│   ├── conftest.py       # Test fixtures
+│   ├── test_auth.py      # Authentication tests
+│   ├── test_main.py      # Main route tests
+│   └── test_models.py    # Model tests
+├── instance/             # Instance files (gitignored)
+│   └── users.sqlite3     # SQLite database
 └── README.md
 ```
 
